@@ -1,7 +1,9 @@
 package com.appsmontreal;
 
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final double INITIALPOSITION = 0.30;
     int minutes;
     int seconds;
+    long totalTimeInSeconds;
     String minutesString;
     String secondsString;
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewTimer.setText("0:40");
                 break;
             case R.id.buttonStart:
+                playCountDownTimer();
                 break;
             case R.id.buttonExit:
                 finish();
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        totalTimeInSeconds = (long) progress * 1000;
         minutes = progress / 60;
         minutesString = String.valueOf(minutes);
         seconds = progress - (minutes * 60);
@@ -83,4 +88,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onStopTrackingTouch(SeekBar seekBar) {
 
     }
+
+    public void playCountDownTimer(){
+        CountDownTimer countDownTimer = new CountDownTimer(totalTimeInSeconds,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                textViewTimer.setText(minutes + ":" + seconds--);
+                if (seconds == 0){
+                    minutes--;
+                    seconds = 59;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
+    }
+
 }
