@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int seconds;
     long totalTimeInSeconds;
     MediaPlayer mediaPlayer;
+    CountDownTimer countDownTimer;
 
 
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonReset:
                 textViewTimer.setText("00:30");
                 mediaPlayer.stop();
+                countDownTimer.cancel();
                 break;
             case R.id.buttonStart:
                 playCountDownTimer();
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void playCountDownTimer(){
-        CountDownTimer countDownTimer = new CountDownTimer(totalTimeInSeconds,1000) {
+        countDownTimer = new CountDownTimer(totalTimeInSeconds,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 textViewTimer.setText(((minutes < 10)?"0" + minutes:minutes) + ":" + ((--seconds <10)?"0" + seconds:seconds));
