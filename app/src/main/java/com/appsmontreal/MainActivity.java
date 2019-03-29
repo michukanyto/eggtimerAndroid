@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int minutes;
     int seconds;
     long totalTimeInSeconds;
-    String minutesString;
-    String secondsString;
+//    String minutesString;
+//    String secondsString;
 
 
     @Override
@@ -72,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         totalTimeInSeconds = (long) progress * 1000;
         minutes = progress / 60;
-        minutesString = String.valueOf(minutes);
+//        minutesString = String.valueOf(minutes);
         seconds = progress - (minutes * 60);
-        secondsString = String.valueOf(seconds);
-        textViewTimer.setText(minutes + ":" + seconds);
+//        secondsString = String.valueOf(seconds);
+        textViewTimer.setText(minutes + ":" + ((seconds <10)?"0" + seconds:seconds));
         Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
@@ -93,10 +93,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CountDownTimer countDownTimer = new CountDownTimer(totalTimeInSeconds,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textViewTimer.setText(minutes + ":" + seconds--);
+                textViewTimer.setText(minutes + ":" + ((--seconds <10)?"0" + seconds:seconds));
                 if (seconds == 0){
-                    minutes--;
-                    seconds = 59;
+                    if (minutes != 0){
+                        minutes--;
+                    }
+                    seconds = 60;
                 }
             }
 
