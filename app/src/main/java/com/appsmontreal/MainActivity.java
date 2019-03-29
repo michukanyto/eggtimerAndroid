@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SeekBar seekBarTime;
     final int MAX = 330;
     final double INITIALPOSITION = 0.30;
+    int minutes;
+    int seconds;
+    String minutesString;
+    String secondsString;
 
 
     @Override
@@ -62,7 +66,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        textViewTimer.setText(String.valueOf(progress));
+        minutes = progress / 60;
+        minutesString = String.valueOf(minutes);
+        seconds = progress - (minutes * 60);
+        secondsString = String.valueOf(seconds);
+        textViewTimer.setText(minutes + ":" + seconds);
         Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
