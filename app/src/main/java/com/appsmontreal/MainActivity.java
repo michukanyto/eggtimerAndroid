@@ -1,5 +1,6 @@
 package com.appsmontreal;
 
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonExit;
     TextView textViewTimer;
     SeekBar seekBarTime;
-    final int MAX = 330;
+    final int MAX = 730;
     final int INITIALPOSITION = 30;
     int minutes;
     int seconds;
     long totalTimeInSeconds;
+    MediaPlayer mediaPlayer;
 
 
 
@@ -44,14 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seekBarTime.setOnSeekBarChangeListener(this);
         seekBarTime.setMax(MAX);
         seekBarTime.setProgress(INITIALPOSITION);
-
+        mediaPlayer = MediaPlayer.create(this,R.raw.rooster);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset:
-                textViewTimer.setText("0:40");
+                textViewTimer.setText(INITIALPOSITION);
+                mediaPlayer.stop();
                 break;
             case R.id.buttonStart:
                 playCountDownTimer();
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         totalTimeInSeconds = (long) progress * 1000;
         minutes = progress / 60;
         seconds = progress - (minutes * 60);
-        textViewTimer.setText(minutes + ":" + ((seconds <10)?"0" + seconds:seconds));
+        textViewTimer.setText(((minutes < 10)?"0" + minutes:minutes) + ":" + ((seconds <10)?"0" + seconds:seconds));
         Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CountDownTimer countDownTimer = new CountDownTimer(totalTimeInSeconds,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textViewTimer.setText(minutes + ":" + ((--seconds <10)?"0" + seconds:seconds));
+                textViewTimer.setText(((minutes < 10)?"0" + minutes:minutes) + ":" + ((--seconds <10)?"0" + seconds:seconds));
                 if (seconds == 0){
                     if (minutes != 0){
                         minutes--;
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-
+                mediaPlayer.start();
             }
         }.start();
     }
