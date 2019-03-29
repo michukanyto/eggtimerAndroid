@@ -18,12 +18,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textViewTimer;
     SeekBar seekBarTime;
     final int MAX = 330;
-    final double INITIALPOSITION = 0.30;
+    final int INITIALPOSITION = 30;
     int minutes;
     int seconds;
     long totalTimeInSeconds;
-//    String minutesString;
-//    String secondsString;
+
 
 
     @Override
@@ -44,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seekBarTime = findViewById(R.id.seekBarTime);
         seekBarTime.setOnSeekBarChangeListener(this);
         seekBarTime.setMax(MAX);
-        seekBarTime.setProgress(100);
-
+        seekBarTime.setProgress(INITIALPOSITION);
 
     }
 
@@ -72,9 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         totalTimeInSeconds = (long) progress * 1000;
         minutes = progress / 60;
-//        minutesString = String.valueOf(minutes);
         seconds = progress - (minutes * 60);
-//        secondsString = String.valueOf(seconds);
         textViewTimer.setText(minutes + ":" + ((seconds <10)?"0" + seconds:seconds));
         Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
