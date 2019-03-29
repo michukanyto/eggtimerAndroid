@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset:
-                textViewTimer.setText(INITIALPOSITION);
+                textViewTimer.setText("00:30");
                 mediaPlayer.stop();
                 break;
             case R.id.buttonStart:

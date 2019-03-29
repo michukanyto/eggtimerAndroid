@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textViewtitle"
-        android:layout_width="178dp"
-        android:layout_height="45dp"
+        android:layout_width="221dp"
+        android:layout_height="49dp"
         android:layout_marginStart="130dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="130dp"
@@ -18,7 +18,7 @@
         android:text="Egg timmer"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
-        android:textSize="30sp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,14 +60,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewEgg"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
 
     <Button
         android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30sp"
+        android:layout_marginLeft="20sp"
         android:background="#e1b12c"
         android:fontFamily="@font/bangers"
         android:text="Start"
@@ -90,6 +91,8 @@
         app:layout_constraintTop_toTopOf="@id/buttonReset"
         app:layout_constraintLeft_toRightOf="@id/buttonStart"
         android:layout_marginLeft="30sp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="40sp"
         />
 
     <TextView
