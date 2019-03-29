@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     Button buttonReset;
     Button buttonStart;
     Button buttonExit;
-    EditText editTextTimer;
+    TextView textViewTimer;
     SeekBar seekBarTime;
     final int MAX = 330;
     final double INITIALPOSITION = 0.30;
@@ -31,22 +33,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(this);
         buttonStart.setOnClickListener(this);
         buttonExit.setOnClickListener(this);
+        textViewTimer = findViewById(R.id.textViewTimer);
         seekBarTime = findViewById(R.id.seekBarTime);
+        seekBarTime.setOnSeekBarChangeListener(this);
         seekBarTime.setMax(MAX);
         seekBarTime.setProgress(100);
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            
+            case R.id.buttonReset:
+                textViewTimer.setText("0:40");
+                break;
+            case R.id.buttonStart:
+                break;
+            case R.id.buttonExit:
+                finish();
+                break;
+            default:
+                break;
+
         }
 
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+        textViewTimer.setText(String.valueOf(progress));
+        Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
     @Override
