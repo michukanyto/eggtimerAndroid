@@ -17,12 +17,14 @@ public class Sound {
     }
 
     public void soundExit(){
-
+        mediaPlayer = MediaPlayer.create(context,R.raw.woosh);
+        playSound(mediaPlayer);
     }
-//
-//    public void soundStop(){
-//        mediaPlayer.stop();
-//    }
+
+    public void soundReset(){
+        mediaPlayer = MediaPlayer.create(context,R.raw.tick);
+        playSound(mediaPlayer);
+    }
 
     private void playSound(MediaPlayer play){
         play.start();

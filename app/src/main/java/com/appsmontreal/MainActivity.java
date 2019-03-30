@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int minutes;
     int seconds;
     long totalTimeInSeconds;
-//    MediaPlayer mediaPlayer;
     CountDownTimer countDownTimer;
     Sound sound;
 
@@ -44,12 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(this);
         buttonStart.setOnClickListener(this);
         buttonExit.setOnClickListener(this);
+        buttonReset.setEnabled(false);
         textViewTimer = findViewById(R.id.textViewTimer);
         seekBarTime = findViewById(R.id.seekBarTime);
         seekBarTime.setOnSeekBarChangeListener(this);
         seekBarTime.setMax(MAX);
         seekBarTime.setProgress(INITIALPOSITION);
-//        mediaPlayer = MediaPlayer.create(this,R.raw.rooster);
         sound = new Sound(this);
 
     }
@@ -58,15 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset:
+                sound.soundReset();
+                seekBarTime.setProgress(INITIALPOSITION);
                 textViewTimer.setText(STRINGINITIALPOSITION);
-//                mediaPlayer.stop();
-//                sound.soundStop();
                 countDownTimer.cancel();
+                buttonStart.setEnabled(true);
                 break;
             case R.id.buttonStart:
                 playCountDownTimer();
+                buttonReset.setEnabled(true);
                 break;
             case R.id.buttonExit:
+                sound.soundExit();
                 finish();
                 break;
             default:
@@ -110,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-//                mediaPlayer.start();
                 sound.soundGetFinishTimer();
+                buttonStart.setEnabled(false);
             }
         }.start();
     }
