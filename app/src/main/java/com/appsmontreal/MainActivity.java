@@ -62,10 +62,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewTimer.setText(STRINGINITIALPOSITION);
                 countDownTimer.cancel();
                 buttonStart.setEnabled(true);
+                seekBarTime.setEnabled(true);
                 break;
             case R.id.buttonStart:
                 playCountDownTimer();
                 buttonReset.setEnabled(true);
+                seekBarTime.setEnabled(false);
                 break;
             case R.id.buttonExit:
                 sound.soundExit();
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minutes = progress / 60;
         seconds = progress - (minutes * 60);
         textViewTimer.setText(((minutes < 10)?"0" + minutes:minutes) + ":" + ((seconds <10)?"0" + seconds:seconds));
-//        Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
     @Override
