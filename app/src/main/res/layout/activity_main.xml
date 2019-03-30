@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="30sp"
-        android:background="#fbc531"
+        android:background="#e1b12c"
         android:fontFamily="@font/bangers"
         android:text="Reset"
         android:textColor="@android:color/background_dark"
@@ -68,7 +68,7 @@
         android:id="@+id/buttonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20sp"
+        android:layout_marginLeft="32dp"
         android:background="#e1b12c"
         android:fontFamily="@font/bangers"
         android:text="Start"
@@ -77,11 +77,12 @@
         app:layout_constraintLeft_toRightOf="@id/buttonReset"
         app:layout_constraintTop_toTopOf="@id/buttonReset" />
 
+
     <Button
         android:id="@+id/buttonExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#fbc531"
+        android:background="#e1b12c"
         android:fontFamily="@font/bangers"
         android:text="exit"
         android:textColor="@android:color/background_dark"

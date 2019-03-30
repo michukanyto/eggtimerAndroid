@@ -20,11 +20,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SeekBar seekBarTime;
     final int MAX = 730;
     final int INITIALPOSITION = 30;
+    final String STRINGINITIALPOSITION = "00:30";
     int minutes;
     int seconds;
     long totalTimeInSeconds;
-    MediaPlayer mediaPlayer;
+//    MediaPlayer mediaPlayer;
     CountDownTimer countDownTimer;
+    Sound sound;
 
 
 
@@ -47,15 +49,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seekBarTime.setOnSeekBarChangeListener(this);
         seekBarTime.setMax(MAX);
         seekBarTime.setProgress(INITIALPOSITION);
-        mediaPlayer = MediaPlayer.create(this,R.raw.rooster);
+//        mediaPlayer = MediaPlayer.create(this,R.raw.rooster);
+        sound = new Sound(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonReset:
-                textViewTimer.setText("00:30");
-                mediaPlayer.stop();
+                textViewTimer.setText(STRINGINITIALPOSITION);
+//                mediaPlayer.stop();
+//                sound.soundStop();
                 countDownTimer.cancel();
                 break;
             case R.id.buttonStart:
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         minutes = progress / 60;
         seconds = progress - (minutes * 60);
         textViewTimer.setText(((minutes < 10)?"0" + minutes:minutes) + ":" + ((seconds <10)?"0" + seconds:seconds));
-        Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
+//        Toast.makeText(this,String.valueOf(progress),Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -105,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFinish() {
-                mediaPlayer.start();
+//                mediaPlayer.start();
+                sound.soundGetFinishTimer();
             }
         }.start();
     }
